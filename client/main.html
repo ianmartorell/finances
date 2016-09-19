@@ -1,0 +1,121 @@
+<head>
+  <title>Finances</title>
+</head>
+
+<body>
+  <div class="ui container">
+    {{> debtStatus}}
+    {{> addTicket}}
+    {{> ticketList}}
+  </div>
+</body>
+
+<template name="debtStatus">
+  <div class="ui segment">
+    <div class="ui small header">
+      Current debt status:
+    </div>
+    {{#each people}}
+      <div>
+        {{#each people}}
+          {{> debtStatusRow}}
+        {{/each}}
+      </div>
+    {{/each}}
+  </div>
+</template>
+
+<template name="debtStatusRow">
+  {{#if isDebtPositive}}
+    <div class="ui checkbox">
+      <input type="checkbox">
+      <label><div>{{name}} → {{../name}}:&ensp;{{debt}}€</div></label>
+    </div>
+  {{/if}}
+</template>
+
+<template name="addTicket">
+  <form id="create-ticket-form" class="ui form">
+    <div class="field">
+      <label for="tag">Etiqueta</label>
+      <input id="tag-input" type="text" name="tag" placeholder="Mercadona">
+    </div>
+    <div class="field">
+      <label for="buyerId">Comprador</label>
+      {{> buyerDropdown}}
+    </div>
+    <div class="field">
+      <label for="ownersIds">Propietaris</label>
+      {{> ownersDropdown}}
+    </div>
+    <div class="field">
+      <label for="price">Preu</label>
+      <input id="price-input" type="number" step="0.01" name="price" placeholder="3.14">
+    </div>
+    <button class="ui button" type="submit">Crear</button>
+  </form>
+</template>
+
+<template name="buyerDropdown">
+  <div id="buyer-dropdown" class="ui fluid selection dropdown">
+    <input id="buyer-id-input" type="hidden" name="buyerId">
+    <i class="dropdown icon"></i>
+    <div class="default text">Qui ho ha comprat?</div>
+    <div class="menu">
+      {{#each people}}
+        <div class="item" data-value="{{_id}}">
+          {{name}}
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</template>
+
+<template name="ownersDropdown">
+  <select id="owners-ids-select" multiple="" name="ownersIds">
+    <option value="">Per qui és?</option>
+    {{#each people}}
+      <option value="{{_id}}">{{name}}</option>
+    {{/each}}
+  </select>
+</template>
+
+<template name="ticketList">
+  <div class="ui cards">
+    {{#each tickets}}
+      {{> ticket}}
+    {{/each}}
+  </div>
+</template>
+
+<template name="ticket">
+  <div class="ui card">
+    <div class="content">
+      <div>
+        Etiqueta: {{tag}}
+      </div>
+      <div>
+        Comprador: {{name buyerId}}
+      </div>
+      <div>
+        Deutes:
+        <div class="ui list">
+          {{#each debts}}
+            <div class="item">
+              <div class="ui checkbox">
+                <input type="checkbox" name="paid" checked="{{paid}}">
+                <label for="paid">{{name fromPersonId}} → {{name toPersonId}}:&ensp;{{amount}}€</label>
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+    <div class="ui extra content">
+      Total: {{price}}€
+      <span class="right floated trash">
+        <i class="trash link icon"></i>
+      </span>
+    </div>
+  </div>
+</template>
