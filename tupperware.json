@@ -1,0 +1,5 @@
+{
+  "preBuildCommands": [
+    "meteor npm install --production"
+  ]
+}
