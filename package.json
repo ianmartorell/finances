@@ -1,6 +1,5 @@
 {
   "name": "finances",
-  "private": true,
   "scripts": {
     "start": "meteor run"
   },
