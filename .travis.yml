@@ -6,5 +6,5 @@ services:
 script:
   - docker build -t finances .
   - docker tag finances quay.io/ian/finances
-  - docker login -u="$QUAY_USERNAME" -p="$QUAY_PASSWORD"
+  - docker login quay.io -u="$QUAY_USERNAME" -p="$QUAY_PASSWORD"
   - docker push quay.io/ian/finances
