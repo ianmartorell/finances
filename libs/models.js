@@ -38,7 +38,7 @@ const Ticket = Class.create({
   behaviors: {
     timestamp: {}
   },
-  methods: {
+  helpers: {
     setPaid(personId, paid) {
       for (const debtId of this.debtsIds) {
         const debt = Debt.findOne(debtId);
