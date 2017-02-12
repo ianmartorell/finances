@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/ianmartorell/finances.svg?branch=master)](https://travis-ci.org/ianmartorell/finances)
+[![Docker Repository on Quay](https://quay.io/repository/ian/finances/status "Docker Repository on Quay")](https://quay.io/repository/ian/finances)
 
 For example:
 
